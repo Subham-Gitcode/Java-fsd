@@ -1,0 +1,41 @@
+public class InnerClassVerificationExample {
+
+    // Outer class
+    public class Outer {
+        private int outerField;
+
+        public Outer(int value) {
+            outerField = value;
+        }
+
+        public void displayOuterField() {
+            System.out.println("Outer Field: " + outerField);
+        }
+
+        // Inner class
+        public class Inner {
+            private int innerField;
+
+            public Inner(int value) {
+                innerField = value;
+            }
+
+            public void displayInnerField() {
+                System.out.println("Inner Field: " + innerField);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create an instance of the outer class
+        InnerClassVerificationExample outerInstance = new InnerClassVerificationExample();
+        InnerClassVerificationExample.Outer outer = outerInstance.new Outer(42);
+
+        // Create an instance of the inner class
+        InnerClassVerificationExample.Outer.Inner inner = outer.new Inner(10);
+
+        // Access fields and methods of both outer and inner classes
+        outer.displayOuterField();
+        inner.displayInnerField();
+    }
+}

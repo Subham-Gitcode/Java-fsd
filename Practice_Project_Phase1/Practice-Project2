@@ -1,0 +1,55 @@
+// Public class can be accessed from anywhere
+public class AccessModifiersExample {
+
+    // Public field can be accessed from anywhere
+    public int publicField = 10;
+
+    // Private field can only be accessed within this class
+    private int privateField = 20;
+
+    // Protected field can be accessed within the same package and by subclasses
+    protected int protectedField = 30;
+
+    // Default (package-private) field can be accessed within the same package
+    int defaultField = 40;
+
+    // Public constructor can be accessed from anywhere
+    public AccessModifiersExample() {
+        System.out.println("Public constructor");
+    }
+
+    // Private method can only be accessed within this class
+    private void privateMethod() {
+        System.out.println("Private method");
+    }
+
+    // Protected method can be accessed within the same package and by subclasses
+    protected void protectedMethod() {
+        System.out.println("Protected method");
+    }
+
+    // Default (package-private) method can be accessed within the same package
+    void defaultMethod() {
+        System.out.println("Default method");
+    }
+
+    public static void main(String[] args) {
+        AccessModifiersExample obj = new AccessModifiersExample();
+
+        // Accessing fields and methods
+        System.out.println("Public field: " + obj.publicField);
+        // System.out.println("Private field: " + obj.privateField); // Error: Cannot access private field
+        System.out.println("Protected field: " + obj.protectedField);
+        System.out.println("Default field: " + obj.defaultField);
+
+        obj.publicMethod();
+        // obj.privateMethod(); // Error: Cannot access private method
+        obj.protectedMethod();
+        obj.defaultMethod();
+    }
+
+    // Public method can be accessed from anywhere
+    public void publicMethod() {
+        System.out.println("Public method");
+    }
+}

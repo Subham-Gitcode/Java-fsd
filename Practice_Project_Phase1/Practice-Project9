@@ -1,0 +1,28 @@
+public class ArrayVerificationExample {
+
+    public static void main(String[] args) {
+        // Declaration and initialization of an integer array
+        int[] numbers = { 1, 2, 3, 4, 5 };
+
+        // Accessing and displaying array elements
+        System.out.println("Array elements:");
+
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println("Element at index " + i + ": " + numbers[i]);
+        }
+
+        // Modifying an array element
+        numbers[2] = 99;
+
+        // Accessing and displaying modified array elements
+        System.out.println("\nModified array elements:");
+
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println("Element at index " + i + ": " + numbers[i]);
+        }
+
+        // Finding the length of the array
+        int arrayLength = numbers.length;
+        System.out.println("\nArray Length: " + arrayLength);
+    }
+}

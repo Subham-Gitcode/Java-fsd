@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Map;
+
+public class CollectionVerificationExample {
+
+    public static void main(String[] args) {
+        // ArrayList: A dynamic array to store a list of elements
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Apple");
+        arrayList.add("Banana");
+        arrayList.add("Cherry");
+
+        System.out.println("ArrayList elements:");
+        for (String fruit : arrayList) {
+            System.out.println(fruit);
+        }
+
+        // HashSet: A set that doesn't allow duplicate elements
+        HashSet<Integer> hashSet = new HashSet<>();
+        hashSet.add(1);
+        hashSet.add(2);
+        hashSet.add(3);
+        hashSet.add(2); // Duplicate element, won't be added
+
+        System.out.println("\nHashSet elements:");
+        for (Integer number : hashSet) {
+            System.out.println(number);
+        }
+
+        // HashMap: A key-value pair collection
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put("One", 1);
+        hashMap.put("Two", 2);
+        hashMap.put("Three", 3);
+
+        System.out.println("\nHashMap elements:");
+        // Iterating through the key-value pairs using an iterator
+        Set<Map.Entry<String, Integer>> entrySet = hashMap.entrySet();
+        Iterator<Map.Entry<String, Integer>> iterator = entrySet.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Integer> entry = iterator.next();
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}

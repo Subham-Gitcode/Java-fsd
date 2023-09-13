@@ -1,0 +1,42 @@
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class MapVerificationExample {
+
+    public static void main(String[] args) {
+        // HashMap: An unordered map that allows null keys and values
+        Map<String, Integer> hashMap = new HashMap<>();
+        hashMap.put("Alice", 25);
+        hashMap.put("Bob", 30);
+        hashMap.put("Charlie", 22);
+
+        System.out.println("HashMap elements:");
+        for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        // TreeMap: A sorted map based on natural order or a custom comparator
+        Map<String, Integer> treeMap = new TreeMap<>();
+        treeMap.put("Zebra", 10);
+        treeMap.put("Lion", 15);
+        treeMap.put("Elephant", 5);
+
+        System.out.println("\nTreeMap elements (sorted by keys):");
+        for (Map.Entry<String, Integer> entry : treeMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        // LinkedHashMap: A map that maintains insertion order
+        Map<String, Integer> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("Java", 1995);
+        linkedHashMap.put("Python", 1991);
+        linkedHashMap.put("C++", 1985);
+
+        System.out.println("\nLinkedHashMap elements (maintains insertion order):");
+        for (Map.Entry<String, Integer> entry : linkedHashMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}

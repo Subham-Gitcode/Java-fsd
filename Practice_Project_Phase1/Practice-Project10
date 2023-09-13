@@ -1,0 +1,33 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegularExpressionVerificationExample {
+
+    public static void main(String[] args) {
+        // Regular expression pattern to validate email addresses
+        String emailPattern = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+
+        // Array of sample email addresses to be validated
+        String[] emails = {
+            "user@example.com",
+            "john.doe123@gmail.com",
+            "invalid-email",
+            "another.email@domain.co.uk",
+            "user@domain.with-hyphen"
+        };
+
+        // Create a Pattern object
+        Pattern pattern = Pattern.compile(emailPattern);
+
+        // Iterate through the email addresses and validate them
+        for (String email : emails) {
+            Matcher matcher = pattern.matcher(email);
+
+            if (matcher.matches()) {
+                System.out.println(email + " is a valid email address.");
+            } else {
+                System.out.println(email + " is not a valid email address.");
+            }
+        }
+    }
+}

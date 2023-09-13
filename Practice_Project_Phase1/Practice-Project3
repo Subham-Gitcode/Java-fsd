@@ -1,0 +1,34 @@
+
+
+public class MethodVerificationExample {
+
+    // Method to add two integers
+    public static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        // Call the add method and store the result in a variable
+        int result = add(5, 3);
+        System.out.println("Result of add method: " + result);
+
+        // Call the add method directly inside a println statement
+        System.out.println("Result of add method: " + add(8, 2));
+
+        // Call the add method with variables
+        int num1 = 10;
+        int num2 = 7;
+        int sum = add(num1, num2);
+        System.out.println("Result of add method: " + sum);
+
+        // Call the add method with user input
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        System.out.print("Enter the first number: ");
+        int userInput1 = scanner.nextInt();
+        System.out.print("Enter the second number: ");
+        int userInput2 = scanner.nextInt();
+        int userResult = add(userInput1, userInput2);
+        System.out.println("Result of add method: " + userResult);
+        scanner.close();
+    }
+}

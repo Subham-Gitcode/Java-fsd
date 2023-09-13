@@ -1,0 +1,29 @@
+public class ConstructorVerificationExample {
+
+    // No-argument constructor
+    public ConstructorVerificationExample() {
+        System.out.println("This is a no-argument constructor.");
+    }
+
+    // Parameterized constructor
+    public ConstructorVerificationExample(String message) {
+        System.out.println("Parameterized constructor with message: " + message);
+    }
+
+    // Constructor chaining
+    public ConstructorVerificationExample(int number, String message) {
+        this("Default Message"); // Call the parameterized constructor with a default message
+        System.out.println("Constructor chaining - Number: " + number + ", Message: " + message);
+    }
+
+    public static void main(String[] args) {
+        // Create an object using the no-argument constructor
+        ConstructorVerificationExample obj1 = new ConstructorVerificationExample();
+
+        // Create an object using the parameterized constructor
+        ConstructorVerificationExample obj2 = new ConstructorVerificationExample("Hello, World!");
+
+        // Create an object using constructor chaining
+        ConstructorVerificationExample obj3 = new ConstructorVerificationExample(42, "Constructor Chaining Example");
+    }
+}
