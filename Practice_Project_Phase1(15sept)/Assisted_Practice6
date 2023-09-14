@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class ExceptionHandlingDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+
+        try {
+            int number = scanner.nextInt(); // Try to read an integer from user input
+
+            // Attempt to divide 10 by the user-entered number
+            int result = 10 / number;
+
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            // Handle division by zero or other arithmetic errors
+            System.out.println("Error: Division by zero or other arithmetic error.");
+        } catch (java.util.InputMismatchException e) {
+            // Handle input mismatch exceptions (e.g., user enters a non-integer)
+            System.out.println("Error: Invalid input. Please enter a valid integer.");
+        } finally {
+            // Close the scanner in the 'finally' block to ensure it's always closed
+            scanner.close();
+        }
+
+        System.out.println("Program continues...");
+    }
+}

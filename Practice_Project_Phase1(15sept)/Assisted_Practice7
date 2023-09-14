@@ -1,0 +1,106 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class FileCRUDOperations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Choose an operation:");
+        System.out.println("1. Create a file");
+        System.out.println("2. Read a file");
+        System.out.println("3. Update a file");
+        System.out.println("4. Delete a file");
+        System.out.print("Enter your choice (1/2/3/4): ");
+        
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+        
+        switch (choice) {
+            case 1:
+                createFile(scanner);
+                break;
+            case 2:
+                readFile(scanner);
+                break;
+            case 3:
+                updateFile(scanner);
+                break;
+            case 4:
+                deleteFile(scanner);
+                break;
+            default:
+                System.out.println("Invalid choice");
+        }
+        
+        scanner.close();
+    }
+    
+    // Create a new file
+    private static void createFile(Scanner scanner) {
+        System.out.print("Enter the file name: ");
+        String fileName = scanner.nextLine();
+        
+        try {
+            File file = new File(fileName);
+            if (file.createNewFile()) {
+                System.out.println("File created successfully.");
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+    
+    // Read the contents of a file
+    private static void readFile(Scanner scanner) {
+        System.out.print("Enter the file name: ");
+        String fileName = scanner.nextLine();
+        
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+    
+    // Update the contents of a file
+    private static void updateFile(Scanner scanner) {
+        System.out.print("Enter the file name: ");
+        String fileName = scanner.nextLine();
+        
+        System.out.print("Enter the new content: ");
+        String newContent = scanner.nextLine();
+        
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            writer.write(newContent);
+            writer.close();
+            System.out.println("File updated successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+    
+    // Delete a file
+    private static void deleteFile(Scanner scanner) {
+        System.out.print("Enter the file name: ");
+        String fileName = scanner.nextLine();
+        
+        File file = new File(fileName);
+        if (file.exists()) {
+            if (file.delete()) {
+                System.out.println("File deleted successfully.");
+            } else {
+                System.out.println("Failed to delete the file.");
+            }
+        } else {
+            System.out.println("File not found.");
+        }
+    }
+}

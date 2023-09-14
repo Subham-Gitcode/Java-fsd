@@ -1,0 +1,45 @@
+class SharedResource {
+    boolean isReady = false;
+
+    synchronized void produce() {
+        System.out.println("Producer is producing...");
+        try {
+            Thread.sleep(2000); // Simulate some time needed for production
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+        isReady = true;
+        System.out.println("Producer has finished producing.");
+        notify(); // Notify waiting consumer
+    }
+
+    synchronized void consume() {
+        while (!isReady) {
+            System.out.println("Consumer is waiting for the producer to finish...");
+            try {
+                wait(); // Wait for producer to notify
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
+        System.out.println("Consumer is consuming.");
+        isReady = false;
+    }
+}
+
+public class SleepAndWaitExample {
+    public static void main(String[] args) {
+        SharedResource sharedResource = new SharedResource();
+
+        Thread producerThread = new Thread(() -> {
+            sharedResource.produce();
+        });
+
+        Thread consumerThread = new Thread(() -> {
+            sharedResource.consume();
+        });
+
+        producerThread.start();
+        consumerThread.start();
+    }
+}

@@ -1,0 +1,85 @@
+// Encapsulation: Create a class to encapsulate data and behavior
+class BankAccount {
+    private String accountHolder;
+    private double balance;
+
+    public BankAccount(String accountHolder, double balance) {
+        this.accountHolder = accountHolder;
+        this.balance = balance;
+    }
+
+    // Getter methods for encapsulated fields
+    public String getAccountHolder() {
+        return accountHolder;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    // Method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited $" + amount + " into " + accountHolder + "'s account.");
+        }
+    }
+
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn $" + amount + " from " + accountHolder + "'s account.");
+        } else {
+            System.out.println("Withdrawal failed for " + accountHolder + ". Insufficient balance.");
+        }
+    }
+}
+
+// Inheritance: Create a subclass
+class SavingsAccount extends BankAccount {
+    private double interestRate;
+
+    public SavingsAccount(String accountHolder, double balance, double interestRate) {
+        super(accountHolder, balance);
+        this.interestRate = interestRate;
+    }
+
+    // Method to calculate interest
+    public void calculateInterest() {
+        double interest = getBalance() * interestRate / 100;
+        deposit(interest);
+        System.out.println("Interest of $" + interest + " credited to " + getAccountHolder() + "'s account.");
+    }
+}
+
+// Polymorphism: Create a polymorphic method
+class Transaction {
+    public void executeTransaction(BankAccount account, double amount) {
+        account.deposit(amount);
+    }
+}
+
+public class OOPDemo {
+    public static void main(String[] args) {
+        // Create objects of the BankAccount class
+        BankAccount aliceAccount = new BankAccount("Alice", 1000.0);
+        SavingsAccount bobAccount = new SavingsAccount("Bob", 2000.0, 5.0);
+
+        // Demonstrate encapsulation
+        System.out.println(aliceAccount.getAccountHolder() + "'s balance: $" + aliceAccount.getBalance());
+        System.out.println(bobAccount.getAccountHolder() + "'s balance: $" + bobAccount.getBalance());
+
+        // Demonstrate inheritance and polymorphism
+        Transaction transaction = new Transaction();
+        transaction.executeTransaction(aliceAccount, 500.0);
+        transaction.executeTransaction(bobAccount, 300.0);
+
+        // Calculate interest for the SavingsAccount
+        bobAccount.calculateInterest();
+
+        // Display updated balances
+        System.out.println(aliceAccount.getAccountHolder() + "'s updated balance: $" + aliceAccount.getBalance());
+        System.out.println(bobAccount.getAccountHolder() + "'s updated balance: $" + bobAccount.getBalance());
+    }
+}

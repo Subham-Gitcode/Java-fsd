@@ -1,0 +1,33 @@
+// Create a common interface with a default method
+interface CommonInterface {
+    default void display() {
+        System.out.println("CommonInterface's display method");
+    }
+}
+
+// Create two parent classes implementing the common interface
+class ParentA implements CommonInterface {
+    @Override
+    public void display() {
+        System.out.println("ParentA's display method");
+    }
+}
+
+class ParentB implements CommonInterface {
+    @Override
+    public void display() {
+        System.out.println("ParentB's display method");
+    }
+}
+
+// Create a child class that inherits from both ParentA and ParentB
+class Child extends ParentA, ParentB {
+    // This class inherits display() method from both ParentA and ParentB
+}
+
+public class DiamondProblemDemo {
+    public static void main(String[] args) {
+        Child child = new Child();
+        child.display(); // This will invoke Child's display() method
+    }
+}
