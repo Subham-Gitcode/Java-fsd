@@ -1,0 +1,79 @@
+class Node {
+    int data;
+    Node next;
+    Node prev;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class DoublyLinkedList {
+    Node head;
+
+    public DoublyLinkedList() {
+        head = null;
+    }
+
+    // Method to insert a new node at the end of the doubly linked list
+    public void insertAtEnd(int newData) {
+        Node newNode = new Node(newData);
+
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+            newNode.prev = current;
+        }
+    }
+
+    // Method to traverse the doubly linked list in the forward direction
+    public void traverseForward() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    // Method to traverse the doubly linked list in the backward direction
+    public void traverseBackward() {
+        Node current = head;
+        // Move to the last node
+        while (current != null && current.next != null) {
+            current = current.next;
+        }
+
+        // Traverse backward
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.prev;
+        }
+        System.out.println();
+    }
+}
+
+public class DoublyLinkedListTraversal {
+    public static void main(String[] args) {
+        DoublyLinkedList list = new DoublyLinkedList();
+
+        // Insert elements into the doubly linked list
+        list.insertAtEnd(1);
+        list.insertAtEnd(2);
+        list.insertAtEnd(3);
+        list.insertAtEnd(4);
+
+        System.out.println("Forward traversal:");
+        list.traverseForward();
+
+        System.out.println("Backward traversal:");
+        list.traverseBackward();
+    }
+}

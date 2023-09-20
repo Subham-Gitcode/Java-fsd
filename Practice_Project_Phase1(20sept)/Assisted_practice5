@@ -1,0 +1,76 @@
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        head = null;
+    }
+
+    // Method to delete the first occurrence of a key
+    public void deleteNode(int key) {
+        Node current = head;
+        Node prev = null;
+
+        // Handle the case where the key is in the first node
+        if (current != null && current.data == key) {
+            head = current.next;
+            return;
+        }
+
+        // Search for the key in the rest of the list
+        while (current != null && current.data != key) {
+            prev = current;
+            current = current.next;
+        }
+
+        // If the key is not found in the list
+        if (current == null) {
+            System.out.println("Key not found in the linked list.");
+            return;
+        }
+
+        // Delete the key by updating the previous node's next pointer
+        prev.next = current.next;
+    }
+
+    // Method to print the linked list
+    public void printList() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
+
+public class DeleteNodeLinkedList {
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+
+        // Add nodes to the linked list
+        list.head = new Node(1);
+        list.head.next = new Node(2);
+        list.head.next.next = new Node(3);
+        list.head.next.next.next = new Node(4);
+
+        System.out.println("Original Linked List:");
+        list.printList();
+
+        // Delete the first occurrence of the key
+        int key = 3;
+        list.deleteNode(key);
+
+        System.out.println("Linked List after deleting " + key + ":");
+        list.printList();
+    }
+}

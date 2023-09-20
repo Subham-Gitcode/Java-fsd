@@ -1,0 +1,77 @@
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class CircularLinkedList {
+    Node head;
+
+    public CircularLinkedList() {
+        head = null;
+    }
+
+    // Method to insert a new element in a sorted circular linked list
+    public void insertSorted(int newData) {
+        Node newNode = new Node(newData);
+
+        // If the list is empty, make the new node the head and create a self-loop
+        if (head == null) {
+            head = newNode;
+            newNode.next = head;
+        } else if (newData <= head.data) {
+            // If the new data is less than or equal to the head's data, insert at the beginning
+            newNode.next = head;
+            Node current = head;
+            while (current.next != head) {
+                current = current.next;
+            }
+            current.next = newNode;
+            head = newNode;
+        } else {
+            // Find the correct position for insertion in sorted order
+            Node current = head;
+            while (current.next != head && current.next.data < newData) {
+                current = current.next;
+            }
+
+            // Insert the new node after the current node
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+    }
+
+    // Method to print the circular linked list
+    public void printList() {
+        if (head == null) {
+            System.out.println("Circular Linked List is empty.");
+            return;
+        }
+
+        Node current = head;
+        do {
+            System.out.print(current.data + " ");
+            current = current.next;
+        } while (current != head);
+        System.out.println();
+    }
+}
+
+public class InsertSortedCircularLinkedList {
+    public static void main(String[] args) {
+        CircularLinkedList list = new CircularLinkedList();
+
+        // Insert elements into the sorted circular linked list
+        list.insertSorted(3);
+        list.insertSorted(7);
+        list.insertSorted(2);
+        list.insertSorted(5);
+
+        System.out.println("Sorted Circular Linked List:");
+        list.printList();
+    }
+}
