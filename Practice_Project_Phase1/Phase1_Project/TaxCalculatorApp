@@ -1,0 +1,204 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Property {
+    private double builtUpArea;
+    private double ageFactor;
+    private double baseValue;
+
+    public Property(double builtUpArea, double ageFactor, double baseValue) {
+        this.builtUpArea = builtUpArea;
+        this.ageFactor = ageFactor;
+        this.baseValue = baseValue;
+    }
+
+    public double calculateTax() {
+        if (baseValue == 0) {
+            throw new IllegalArgumentException("Base value cannot be zero");
+        }
+
+        if (builtUpArea == 0) {
+            throw new IllegalArgumentException("Built-up area cannot be zero");
+        }
+
+        if (ageFactor == 0) {
+            throw new IllegalArgumentException("Age factor cannot be zero");
+        }
+
+        if (builtUpArea < 0 || ageFactor < 0 || baseValue < 0) {
+            throw new IllegalArgumentException("Input values cannot be negative");
+        }
+
+        double propertyTax;
+        if (isPropertyInCity()) {
+            propertyTax = (builtUpArea * ageFactor * baseValue) + (0.5 * builtUpArea);
+        } else {
+            propertyTax = builtUpArea * ageFactor * baseValue;
+        }
+
+        return propertyTax;
+    }
+
+    private boolean isPropertyInCity() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Is the property located in the city? (Y/N): ");
+        String input = scanner.nextLine();
+        return input.equalsIgnoreCase("Y");
+    }
+}
+
+class Vehicle {
+    private String registrationNumber;
+    private String brand;
+    private double purchaseCost;
+    private double maximumVelocity;
+    private int capacity;
+    private int vehicleType;
+
+    public Vehicle(String registrationNumber, String brand, double purchaseCost, double maximumVelocity, int capacity, int vehicleType) {
+        this.registrationNumber = registrationNumber;
+        this.brand = brand;
+        this.purchaseCost = purchaseCost;
+        this.maximumVelocity = maximumVelocity;
+        this.capacity = capacity;
+        this.vehicleType = vehicleType;
+    }
+
+    public double calculateTax() {
+        if (registrationNumber.length() != 4) {
+            throw new IllegalArgumentException("Registration number should be 4 digits");
+        }
+
+        if (purchaseCost < 50000 || purchaseCost > 1000000) {
+            throw new IllegalArgumentException("Purchase cost should be between INR 50000 and INR 1000000");
+        }
+
+        if (maximumVelocity < 120 || maximumVelocity > 300) {
+            throw new IllegalArgumentException("Maximum velocity should be between 120kmph and 300kmph");
+        }
+
+        if (capacity < 2 || capacity > 50) {
+            throw new IllegalArgumentException("Capacity should be between 2 and 50");
+        }
+
+        double vehicleTax;
+        switch (vehicleType) {
+            case 1:
+                vehicleTax = maximumVelocity + capacity + (0.1 * purchaseCost);
+                break;
+            case 2:
+                vehicleTax = maximumVelocity + capacity + (0.11 * purchaseCost);
+                break;
+            case 3:
+                vehicleTax = maximumVelocity + capacity + (0.12 * purchaseCost);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid vehicle type");
+        }
+
+        return vehicleTax;
+    }
+}
+
+class TaxCalculator {
+    private List<Property> properties;
+    private List<Vehicle> vehicles;
+
+    public TaxCalculator() {
+        properties = new ArrayList<>();
+        vehicles = new ArrayList<>();
+    }
+
+    public void addProperty() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter built-up area: ");
+        double builtUpArea = scanner.nextDouble();
+
+        System.out.println("Enter age factor: ");
+        double ageFactor = scanner.nextDouble();
+
+        System.out.println("Enter base value: ");
+        double baseValue = scanner.nextDouble();
+
+        Property property = new Property(builtUpArea, ageFactor, baseValue);
+        properties.add(property);
+    }
+
+    public void addVehicle() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter registration number: ");
+        String registrationNumber = scanner.nextLine();
+
+        System.out.println("Enter brand: ");
+        String brand = scanner.nextLine();
+
+        System.out.println("Enter purchase cost: ");
+        double purchaseCost = scanner.nextDouble();
+
+        System.out.println("Enter maximum velocity: ");
+        double maximumVelocity = scanner.nextDouble();
+
+        System.out.println("Enter capacity: ");
+        int capacity = scanner.nextInt();
+
+        System.out.println("Enter vehicle type (1-Petrol, 2-Diesel, 3-CNG/LPG): ");
+        int vehicleType = scanner.nextInt();
+
+        Vehicle vehicle = new Vehicle(registrationNumber, brand, purchaseCost, maximumVelocity, capacity, vehicleType);
+        vehicles.add(vehicle);
+    }
+
+    public void displayTotalTaxPayable() {
+        double totalPropertyTax = 0;
+        double totalVehicleTax = 0;
+
+        for (Property property : properties) {
+            totalPropertyTax += property.calculateTax();
+        }
+
+        for (Vehicle vehicle : vehicles) {
+            totalVehicleTax += vehicle.calculateTax();
+        }
+
+        System.out.println("Total number of properties: " + properties.size());
+        System.out.println("Total property tax amount: " + totalPropertyTax);
+
+        System.out.println("Total number of vehicles: " + vehicles.size());
+        System.out.println("Total vehicle tax amount: " + totalVehicleTax);
+
+        System.out.println("Total tax payable: " + (totalPropertyTax + totalVehicleTax));
+    }
+}
+
+public class TaxCalculationApplication {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        TaxCalculator taxCalculator = new TaxCalculator();
+
+        while (true) {
+            System.out.println("1. Add property");
+            System.out.println("2. Add vehicle");
+            System.out.println("3. Display total tax payable");
+            System.out.println("4. Exit");
+            System.out.println("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    taxCalculator.addProperty();
+                    break;
+                case 2:
+                    taxCalculator.addVehicle();
+                    break;
+                case 3:
+                    taxCalculator.displayTotalTaxPayable();
+                    break;
+                case 4:
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice");
+            }
+        }
+    }
+}
