@@ -1,0 +1,46 @@
+import java.io.IOException;
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class MyServlet implements Servlet {
+    private ServletConfig config;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        this.config = config;
+    }
+
+    @Override
+    public void service(ServletRequest request, ServletResponse response)
+            throws ServletException, IOException {
+        // Set the content type for the response
+        response.setContentType("text/html");
+
+        // Get a parameter from the servlet configuration
+        String servletParam = config.getInitParameter("servletParam");
+
+        // Write a simple HTML response
+        response.getWriter().write("<html><head><title>Servlet Demo</title></head><body>");
+        response.getWriter().write("<h2>Hello from MyServlet</h2>");
+        response.getWriter().write("<p>Servlet Parameter: " + servletParam + "</p>");
+        response.getWriter().write("</body></html>");
+    }
+
+    @Override
+    public void destroy() {
+        // Clean up resources when the servlet is destroyed
+    }
+
+    @Override
+    public ServletConfig getServletConfig() {
+        return config;
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "MyServlet - A simple servlet demonstration";
+    }
+}

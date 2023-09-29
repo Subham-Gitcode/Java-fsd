@@ -1,0 +1,48 @@
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/CookieSessionDemo")
+public class CookieSessionDemo extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+
+        // Retrieve the existing session cookie, if any
+        Cookie[] cookies = request.getCookies();
+        String sessionId = null;
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("sessionId".equals(cookie.getName())) {
+                    sessionId = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        if (sessionId == null) {
+            // If no session cookie exists, create a new one
+            sessionId = "Session-" + System.currentTimeMillis();
+            Cookie sessionCookie = new Cookie("sessionId", sessionId);
+
+            // Set the cookie's maximum age to 30 minutes (you can adjust this as needed)
+            sessionCookie.setMaxAge(30 * 60);
+
+            // Add the session cookie to the response
+            response.addCookie(sessionCookie);
+        }
+
+        // Display the session ID to the user
+        response.getWriter().println("<html><head><title>Cookie Session Demo</title></head><body>");
+        response.getWriter().println("<h2>Session ID: " + sessionId + "</h2>");
+        response.getWriter().println("<p>This session is tracked using cookies.</p>");
+        response.getWriter().println("</body></html>");
+    }
+}

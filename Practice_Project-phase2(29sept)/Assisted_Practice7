@@ -1,0 +1,36 @@
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/URLRewriteSessionDemo")
+public class URLRewriteSessionDemo extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+
+        // Retrieve the session ID from the request's URL
+        String sessionId = request.getParameter("sessionId");
+
+        if (sessionId == null || sessionId.isEmpty()) {
+            // If no session ID is found, create a new one
+            sessionId = "Session-" + System.currentTimeMillis();
+
+            // Append the session ID to the URL
+            String urlWithSessionId = response.encodeURL("URLRewriteSessionDemo?sessionId=" + sessionId);
+
+            // Redirect to the URL with the session ID
+            response.sendRedirect(urlWithSessionId);
+        }
+
+        // Display the session ID to the user
+        response.getWriter().println("<html><head><title>URL Rewrite Session Demo</title></head><body>");
+        response.getWriter().println("<h2>Session ID: " + sessionId + "</h2>");
+        response.getWriter().println("<p>This session is tracked using URL rewriting.</p>");
+        response.getWriter().println("</body></html>");
+    }
+}

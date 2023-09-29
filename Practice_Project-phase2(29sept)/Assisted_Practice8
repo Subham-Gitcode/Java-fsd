@@ -1,0 +1,43 @@
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/HiddenFormFieldSessionDemo")
+public class HiddenFormFieldSessionDemo extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+
+        // Retrieve the session ID from the hidden form field
+        String sessionId = request.getParameter("sessionId");
+
+        if (sessionId == null || sessionId.isEmpty()) {
+            // If no session ID is found, create a new one
+            sessionId = "Session-" + System.currentTimeMillis();
+        }
+
+        // Display the session ID and a form with a hidden field
+        response.getWriter().println("<html><head><title>Hidden Form Field Session Demo</title></head><body>");
+        response.getWriter().println("<h2>Session ID: " + sessionId + "</h2>");
+        response.getWriter().println("<p>This session is tracked using hidden form fields.</p>");
+
+        // Create a form with a hidden field to store the session ID
+        response.getWriter().println("<form action='HiddenFormFieldSessionDemo' method='post'>");
+        response.getWriter().println("<input type='hidden' name='sessionId' value='" + sessionId + "'>");
+        response.getWriter().println("<input type='submit' value='Submit'>");
+        response.getWriter().println("</form>");
+
+        response.getWriter().println("</body></html>");
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // In this example, we don't need to handle POST requests
+        doGet(request, response);
+    }
+}

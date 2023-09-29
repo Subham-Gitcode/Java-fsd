@@ -1,0 +1,36 @@
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/HttpSessionDemo")
+public class HttpSessionDemo extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+
+        // Get the current session or create a new one if it doesn't exist
+        HttpSession session = request.getSession();
+
+        // Retrieve or create session data
+        Integer visitCount = (Integer) session.getAttribute("visitCount");
+        if (visitCount == null) {
+            visitCount = 1;
+        } else {
+            visitCount++;
+        }
+        session.setAttribute("visitCount", visitCount);
+
+        // Display session-related information
+        response.getWriter().println("<html><head><title>HTTP Session Demo</title></head><body>");
+        response.getWriter().println("<h2>Session ID: " + session.getId() + "</h2>");
+        response.getWriter().println("<p>Visit Count: " + visitCount + "</p>");
+        response.getWriter().println("<p>This session is tracked using HTTP session.</p>");
+        response.getWriter().println("</body></html>");
+    }
+}
