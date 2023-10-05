@@ -1,0 +1,27 @@
+import java.sql.*;
+
+public class TestJDBC {
+
+    public static void main(String[] args) throws Exception {
+        // Load the MySQL JDBC driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        // Connect to the database
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_database", "root", "password");
+
+        // Create a statement object
+        Statement stmt = conn.createStatement();
+
+        // Execute a query to retrieve the names of all the tables in the database
+        ResultSet rs = stmt.executeQuery("SHOW TABLES");
+
+        // Print the names of all the tables
+        while (rs.next()) {
+            System.out.println(rs.getString(1));
+        }
+
+        // Close the statement and connection objects
+        stmt.close();
+        conn.close();
+    }
+}

@@ -1,0 +1,33 @@
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class RequestLoggingFilter implements Filter {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        // Initialization code if needed
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        // Log information about the incoming request
+        String remoteAddress = request.getRemoteAddr();
+        String requestURI = request.getLocalName();
+        System.out.println("Request from IP: " + remoteAddress + " for URI: " + requestURI);
+
+        // Pass the request and response to the next filter or servlet in the chain
+        chain.doFilter(request, response);
+
+        // You can perform post-processing here if needed
+    }
+
+    @Override
+    public void destroy() {
+        // Cleanup code if needed
+    }
+}

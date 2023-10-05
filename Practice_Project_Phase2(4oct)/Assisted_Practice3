@@ -1,0 +1,25 @@
+import java.sql.*;
+
+public class JDBCExample {
+
+    public static void main(String[] args) throws Exception {
+        // Connect to the database
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_database", "root", "password");
+
+        // Create a statement object
+        Statement stmt = conn.createStatement();
+
+        // Execute a query to retrieve all the rows from the `customers` table
+        ResultSet rs = stmt.executeQuery("SELECT * FROM customers");
+
+        // Iterate over the result set and print the data for each row
+        while (rs.next()) {
+            System.out.println(rs.getInt("id") + ", " + rs.getString("name") + ", " + rs.getString("email"));
+        }
+
+        // Close the result set, statement, and connection objects
+        rs.close();
+        stmt.close();
+        conn.close();
+    }
+}

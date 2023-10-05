@@ -1,0 +1,46 @@
+import java.sql.*;
+
+public class CreateDatabaseExample {
+
+    public static void main(String[] args) throws Exception {
+        // Connect to the database
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "password");
+
+        // Create a statement object
+        Statement stmt = conn.createStatement();
+
+        // Execute a query to create the database
+        stmt.execute("CREATE DATABASE my_database");
+
+        // Close the statement and connection objects
+        stmt.close();
+        conn.close();
+    }
+}
+public class DropDatabaseExample {
+
+    public static void main(String[] args) throws Exception {
+        // Connect to the database
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "password");
+
+        // Create a statement object
+        Statement stmt = conn.createStatement();
+
+        // Execute a query to drop the database
+        stmt.execute("DROP DATABASE my_database");
+
+        // Close the statement and connection objects
+        stmt.close();
+        conn.close();
+    }
+}
+public class SelectDatabaseExample {
+
+    public static void main(String[] args) throws Exception {
+        // Connect to the database
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_database", "root", "password");
+
+        // Close the connection object
+        conn.close();
+    }
+}

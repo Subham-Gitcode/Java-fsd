@@ -1,0 +1,30 @@
+import java.io.IOException;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class MyGenericServlet extends GenericServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public void service(ServletRequest request, ServletResponse response)
+            throws ServletException, IOException {
+        // Set the response content type
+        response.setContentType("text/html");
+
+        // Get information from the request
+        String clientIP = request.getRemoteAddr();
+        String userAgent = request.getHeader("User-Agent");
+
+        // Create a simple HTML response
+        String htmlResponse = "<html><head><title>Generic Servlet Demo</title></head>"
+                + "<body><h2>Hello from MyGenericServlet</h2>"
+                + "<p>Client IP Address: " + clientIP + "</p>"
+                + "<p>User Agent: " + userAgent + "</p>"
+                + "</body></html>";
+
+        // Write the HTML response to the output
+        response.getWriter().write(htmlResponse);
+    }
+}
