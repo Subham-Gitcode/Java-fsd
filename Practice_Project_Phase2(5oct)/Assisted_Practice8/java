@@ -1,0 +1,14 @@
+@Controller
+public class CustomerController {
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    @GetMapping("/customers")
+    public List<Customer> getAllCustomers() {
+        Session session = sessionFactory.openSession();
+        List<Customer> customers = session.createQuery("SELECT c FROM Customer c", Customer.class).list();
+        session.close();
+        return customers;
+    }
+}
