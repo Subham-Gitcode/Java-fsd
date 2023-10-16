@@ -1,0 +1,5 @@
+package com.example;
+
+public class MyBean {
+    // Your bean's properties and methods
+}

@@ -1,0 +1,25 @@
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Create a SessionFactory object
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+        // Open a Session object
+        Session session = sessionFactory.openSession();
+
+        // Get the Customer object with the ID of 1
+        Customer customer = session.get(Customer.class, 1L);
+
+        // Close the Session object
+        session.close();
+
+        // Print the name of the Customer object
+        System.out.println(customer.getName());
+
+        // Print the number of orders for the Customer object
+        System.out.println(customer.getOrders().size());
+    }
+}

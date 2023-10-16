@@ -1,0 +1,89 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+// Custom event class
+class MyEvent {
+    private String message;
+
+    public MyEvent(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}
+
+// Custom event listener interface
+interface MyEventListener {
+    void onMyEvent(MyEvent event);
+}
+
+// Custom event source
+class MyEventSource {
+    private MyEventListener listener;
+
+    public void setEventListener(MyEventListener listener) {
+        this.listener = listener;
+    }
+
+    public void fireEvent(String message) {
+        if (listener != null) {
+            MyEvent event = new MyEvent(message);
+            listener.onMyEvent(event);
+        }
+    }
+}
+
+public class EventHandlingDemo {
+    public static void main(String[] args) {
+        // Create a JFrame and a JPanel
+        JFrame frame = new JFrame("Event Handling Demo");
+        JPanel panel = new JPanel();
+
+        // Create a button for default event handling
+        JButton defaultButton = new JButton("Default Event");
+        defaultButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Default event occurred!");
+            }
+        });
+
+        // Create a button for custom event handling
+        JButton customButton = new JButton("Custom Event");
+        MyEventSource eventSource = new MyEventSource();
+        customButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                eventSource.fireEvent("Custom event occurred!");
+            }
+        });
+
+        // Create a custom event listener
+        MyEventListener myListener = new MyEventListener() {
+            @Override
+            public void onMyEvent(MyEvent event) {
+                System.out.println(event.getMessage());
+            }
+        };
+
+        // Set the custom event listener for the custom event source
+        eventSource.setEventListener(myListener);
+
+        // Add buttons to the panel
+        panel.add(defaultButton);
+        panel.add(customButton);
+
+        // Add the panel to the frame
+        frame.add(panel);
+
+        // Set frame properties
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 150);
+        frame.setVisible(true);
+    }
+}

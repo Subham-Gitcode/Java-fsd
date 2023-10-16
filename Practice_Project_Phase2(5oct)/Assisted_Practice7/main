@@ -1,0 +1,34 @@
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Create a SessionFactory object
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+        // Open a Session object
+        Session session = sessionFactory.openSession();
+
+        // Create a new Customer object
+        Customer customer = new Customer();
+        customer.setName("John Doe");
+
+        Address address = new Address();
+        address.setStreet("123 Main Street");
+        address.setCity("San Francisco");
+        address.setState("CA");
+        address.setZipCode("94105");
+
+        customer.setAddress(address);
+
+        // Save the Customer object to the database
+        session.save(customer);
+
+        // Close the Session object
+        session.close();
+
+        // Close the SessionFactory object
+        sessionFactory.close();
+    }
+}
