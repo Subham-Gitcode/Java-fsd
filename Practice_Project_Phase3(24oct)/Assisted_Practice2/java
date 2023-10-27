@@ -1,0 +1,25 @@
+Assert.notNull(value);
+
+
+
+Assert.isTrue(number > 10);
+
+
+
+public void doSomething(String value) {
+    Assert.notNull(value, "The value argument cannot be null.");
+
+    // ...
+}
+
+
+
+
+
+List<String> list = new ArrayList<>();
+
+// Assert that the list is not empty
+Assert.notEmpty(list, "The list cannot be empty.");
+
+// Get the first element in the list
+String element = list.get(0);

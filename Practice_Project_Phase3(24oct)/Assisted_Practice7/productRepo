@@ -1,0 +1,29 @@
+public class ProductRepositoryImpl implements ProductRepository {
+
+    private final EntityManager entityManager;
+
+    public ProductRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return entityManager.createQuery("SELECT p FROM Product p", Product.class).getResultList();
+    }
+
+    @Override
+    public Product findById(Long id) {
+        return entityManager.find(Product.class, id);
+    }
+
+    @Override
+    public Product save(Product product) {
+        entityManager.persist(product);
+        return product;
+    }
+
+    @Override
+    public void delete(Long id) {
+        entityManager.remove(findById(id));
+    }
+}

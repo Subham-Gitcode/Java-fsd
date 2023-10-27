@@ -1,0 +1,15 @@
+@SpringBootTest
+public class MyServiceTest {
+
+    @TestFactory
+    public Stream<DynamicTest> testDifferentFeatures() {
+        Stream<Integer> input = IntStream.range(0, 10).boxed();
+
+        return input.map(featureNumber -> DynamicTest.stream(
+                "Test feature " + featureNumber,
+                () -> {
+                    // Test the feature
+                }
+        ));
+    }
+}

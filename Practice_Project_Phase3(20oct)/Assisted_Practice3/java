@@ -1,0 +1,24 @@
+@Controller
+public class FileController {
+
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        // Save the file to the server
+        String filename = file.getOriginalFilename();
+        Path filepath = Paths.get("uploads", filename);
+        file.transferTo(filepath);
+
+        // Return a success response
+        return ResponseEntity.ok().body("File uploaded successfully!");
+    }
+
+    @GetMapping("/download/{filename}")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable String filename) throws IOException {
+        // Get the file from the server
+        Path filepath = Paths.get("uploads", filename);
+        byte[] fileData = Files.readAllBytes(filepath);
+
+        // Return a response with the file data
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(fileData);
+    }
+}

@@ -1,0 +1,18 @@
+@Test
+public void testOnlyRunsOnLinux() {
+    // Assume that the operating system is Linux
+    Assume.assumeTrue(System.getProperty("os.name").equals("Linux"));
+
+    // ...
+}
+
+@Test
+public void testOnlyRunsOnLinuxWithJava11() {
+    // Assume that the operating system is Linux
+    Assume.assumeTrue(System.getProperty("os.name").equals("Linux"));
+
+    // Assume that the Java version is greater than 11
+    Assume.assumeTrue(System.getProperty("java.version").startsWith("11"));
+
+    // ...
+}

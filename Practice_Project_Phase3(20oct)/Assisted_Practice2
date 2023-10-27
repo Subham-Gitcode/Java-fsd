@@ -1,0 +1,36 @@
+pom.xml:
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+</dependencies>
+
+RestClient.java:
+public class RestClient {
+
+    private RestTemplate restTemplate;
+
+    public RestClient() {
+        this.restTemplate = new RestTemplate();
+    }
+
+    public String getResponse(String url) {
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        return response.getBody();
+    }
+}
+
+Main.java:
+public class Main {
+
+    public static void main(String[] args) {
+        RestClient restClient = new RestClient();
+
+        // Make a request to the web service
+        String response = restClient.getResponse("https://example.com/api/users");
+
+        // Parse the response
+        // ...
+    }
+}

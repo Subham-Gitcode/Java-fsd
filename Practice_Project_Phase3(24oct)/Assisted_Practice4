@@ -1,0 +1,36 @@
+@SpringBootTest
+public class MyServiceTest {
+
+    @Nested
+    class TestFeature1 {
+
+        @Test
+        public void testFeature1Method1() {
+            // ...
+        }
+
+        @Test
+        public void testFeature1Method2() {
+            // ...
+        }
+    }
+
+    @Nested
+    class TestFeature2 {
+
+        @Test
+        public void testFeature2Method1() {
+            // ...
+        }
+
+        @Test
+        public void testFeature2Method2() {
+            // ...
+        }
+    }
+}
+
+@RepeatedTest(10)
+public void testSomething() {
+    // ...
+}

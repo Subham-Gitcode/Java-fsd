@@ -1,0 +1,35 @@
+@SpringBootTest
+public class MyServiceTest {
+
+    @TestFactory
+    public Stream<DynamicTest> testDatabaseRows() throws SQLException {
+        // Get a connection to the database
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_database", "root", "password");
+
+        // Create a statement to execute the query
+        Statement statement = connection.createStatement();
+
+        // Execute the query and get the results
+        ResultSet results = statement.executeQuery("SELECT * FROM my_table");
+
+        // Create a stream of dynamic test cases
+        Stream<DynamicTest> testCases = Stream.generate(() -> {
+            // Get the next row from the results
+            Row row = results.next();
+
+            // Create a test case for the row
+            return DynamicTest.stream(
+                    "Test row " + row.getId(),
+                    () -> {
+                        // Test the row
+                    }
+            );
+        });
+
+        // Close the connection and statement
+        connection.close();
+        statement.close();
+
+        return testCases;
+    }
+}

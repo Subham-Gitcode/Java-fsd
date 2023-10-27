@@ -1,0 +1,15 @@
+@SpringBootTest
+public class MyServiceTest {
+
+    @Autowired
+    private MyService myService;
+
+    @Test
+    public void testDoSomething() {
+        // Call the method that you are testing
+        String result = myService.doSomething();
+
+        // Verify the results
+        assertEquals("Hello, world!", result);
+    }
+}
