@@ -1,0 +1,36 @@
+// Function Declaration
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+// Function Expression (Anonymous Function)
+const multiply = function (a, b) {
+  return a * b;
+};
+
+// Arrow Function
+const divide = (a, b) => {
+  if (b === 0) {
+    return "Division by zero is not allowed.";
+  }
+  return a / b;
+};
+
+// Function Invocation
+const num1 = 10;
+const num2 = 5;
+
+const sumResult = add(num1, num2);
+const differenceResult = subtract(num1, num2);
+const productResult = multiply(num1, num2);
+const divisionResult = divide(num1, num2);
+
+// Output
+console.log(`Sum: ${num1} + ${num2} = ${sumResult}`);
+console.log(`Difference: ${num1} - ${num2} = ${differenceResult}`);
+console.log(`Product: ${num1} * ${num2} = ${productResult}`);
+console.log(`Division: ${num1} / ${num2} = ${divisionResult}`);

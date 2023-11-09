@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Static Web Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>My Static Web Page</h1>
+  </header>
+
+  <main>
+    <p>This is a simple static web page created using HTML, CSS, and JavaScript.</p>
+    <img src="image.jpg" alt="Image description">
+
+    <ul>
+      <li>List item 1</li>
+      <li>List item 2</li>
+      <li>List item 3</li>
+    </ul>
+
+    <button>Click Me</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 My Static Web Page</p>
+  </footer>
+</body>
+</html>

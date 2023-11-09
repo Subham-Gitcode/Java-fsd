@@ -1,0 +1,18 @@
+// Creating a Map
+const personMap = new Map();
+
+// Adding key-value pairs to the Map
+personMap.set("name", "John");
+personMap.set("age", 30);
+personMap.set("city", "New York");
+
+// Accessing values by key
+console.log(personMap.get("name")); // Output: John
+
+// Checking if a key exists in the Map
+console.log(personMap.has("age")); // Output: true
+
+// Iterating over the Map
+for (const [key, value] of personMap) {
+  console.log(`${key}: ${value}`);
+}
